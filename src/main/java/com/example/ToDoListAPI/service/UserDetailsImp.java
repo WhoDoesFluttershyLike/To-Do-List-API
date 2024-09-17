@@ -1,5 +1,6 @@
 package com.example.ToDoListAPI.service;
 
+import com.example.ToDoListAPI.entity.User;
 import com.example.ToDoListAPI.repository.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

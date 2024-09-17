@@ -3,9 +3,13 @@ package com.example.ToDoListAPI.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.grammars.hql.HqlParser;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.*;
+
 @Getter
 @Setter
 @Entity
@@ -15,10 +19,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     @Column(nullable = false)
     private String title;
 
@@ -26,7 +26,7 @@ public class Task {
     private String description;
 
     @Column
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @Column(nullable = false)
     private Boolean isCompleted = false;
@@ -35,10 +35,10 @@ public class Task {
     private Integer priority;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    @Column(nullable = true)
+    private LocalDateTime updatedAt;
 
     @ManyToMany
     @JoinTable(
@@ -46,5 +46,10 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<Category>();
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
