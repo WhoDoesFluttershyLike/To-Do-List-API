@@ -40,7 +40,7 @@ public class RestController {
         return category;
     }
 
-    @PostMapping("/delete-category")
+    @DeleteMapping("/delete-category")
     public void deleteCategory(@RequestParam Long id){
         categoryService.remove(id);
     }
@@ -64,7 +64,7 @@ public class RestController {
         return taskService.getById(id);
     }
 
-    @PostMapping("update-task")
+    @PutMapping("update-task")
     public Task updateTask(@RequestBody UpdateTaskDto updateTaskDto){
         Task task = taskService.getById(updateTaskDto.getId());
         task.setTitle(updateTaskDto.getTitle());
@@ -81,7 +81,7 @@ public class RestController {
 
     }
 
-    @PostMapping("delete-task")
+    @DeleteMapping("delete-task")
     public void deleteTask(@RequestParam Long id){
         taskService.delete(id);
     }
